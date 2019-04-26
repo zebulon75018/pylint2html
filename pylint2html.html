@@ -8,6 +8,7 @@
             <link rel='stylesheet' href='https://codepen.io/1rosehip/pen/zJYbPV.css'>
             <style>
                 
+                
                 .colorerror {
                     background-color: lightsalmon;
                 }
@@ -59,17 +60,19 @@
              onkeyup="search();"
              placeholder="Filter by Name" />
     
-        <button type="button" id="name-clear-btn">Clear</button>
+        <button type="button" id="name-clear-btn" onclick="showAll();">Clear</button>
     </div>
     <div>&nbsp;</div>
 
         {% for d in pdata %}
+        <div class="my-3 p-3 bg-white rounded shadow-sm">
         <span class="color{{d}}"> {{d}}</span>
            <ul>
             {% for l in pdata[d] %}
-               <li class="name {{l["type"]}}"> {{l["message"]}}</li>
+            <li class="name {{l["type"]}}"><span class="rounded rect"></span><b> {{l["message"]}}</b> :<i>{{l["path"]}} {{l["column"]}}x{{l["line"]}}</i></li>
             {% endfor %}
         </ul>
+        </div>
         {% endfor %}
         </div>
     </body>
@@ -100,5 +103,11 @@
             }
             });
     }
+       function showAll(){
+        $("li").each(function() {
+            $(this).show();
+            $("#search").val("")
+          });
+       }
     </script>
 </html>

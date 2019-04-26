@@ -1,9 +1,7 @@
 # pylint2html
 generate html from pylint json file.
 
-pylint -rn --output-format=json [file.py] > pylint.json
-
-python pylint2html.py  > test.html
+pylint.exe -rn --output-format=json pylint2html.py | python pylint2html.py > test.html
 
 * Feature:
   * Group by type

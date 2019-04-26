@@ -5,9 +5,9 @@ pylint -rn --output-format=json [file.py] > pylint.json
 
 python pylint2html.py  > test.html
 
-*Feature:
-  *Group by type
-  *Filter by type
-  *Filter by content
+* Feature:
+  * Group by type
+  * Filter by type
+  * Filter by content
 
 ![ScreenShot](screen.jpg)

@@ -1,12 +1,12 @@
 import json
 import os
+import sys
 from jinja2 import Environment, FileSystemLoader
 
 THIS_DIR = os.path.dirname(os.path.abspath(__file__))
 
-
-with open("pylint.json", 'r') as f:
-    data = json.load(f)
+inputjson = sys.stdin.readlines()
+data = json.loads(''.join([str(x) for x in inputjson]))
 
 pdata = {}
 for d in data:

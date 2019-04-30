@@ -23,14 +23,23 @@ c.execute('''CREATE TABLE IF NOT EXISTS pylint
               type text,
               symbol text,
               module text,
+              session  integer,
               t timestamp DEFAULT CURRENT_TIMESTAMP)''')
 conn.commit()
 cur = conn.cursor()
-sql = ''' INSERT INTO pylint(message,obj,column,path,line,type,symbol,module)
-              VALUES(?,?,?,?,?,?,?,?) '''
+# get the session number.
+cur.execute("SELECT MAX(session) FROM pylint")
+row = cur.fetchone()
+session = 0
+if row[0] is not None:
+    session = row[0] + 1
+
+# insert data in sql...
+sql = ''' INSERT INTO pylint(message,obj,column,path,line,type,symbol,module,session)
+              VALUES(?,?,?,?,?,?,?,?,?) '''
 cur = conn.cursor()
 for d in data:
-    cur.execute(sql, [d["message"],d["obj"],d["column"],d["path"],d['line'],d["type"],d["symbol"],d["module"]])
+    cur.execute(sql, [d["message"],d["obj"],d["column"],d["path"],d['line'],d["type"],d["symbol"],d["module"],session])
     conn.commit()
 
 conn.close()
